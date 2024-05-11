@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Age Calculator</title>
+  <style>
+    body{
+    display:flex;
+    flex-direction:column;
+    justify-content: center;
+    align-items: center;
+    background-color:rgb(128, 128, 128,0.4);
+}
+.container{
+    width:220px;
+    min-height: 220px;
+    background-color: rgb(50, 183, 228,0.4);
+    border:2px solid;
+    border:none;
+    border-radius: 20px;
+    box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.5); 
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction:row;
+    margin-top:70px;
+    padding:40px;
+}
+.container2{
+    width:100px;
+    min-height: 50px;
+    background-color: rgb(35, 133, 212,0.6);
+    border:2px solid;
+    border:none;
+    border-radius: 20px;
+    box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.5); 
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction:row;
+    margin-top:40px;
+    padding:40px;
+}
+.btn{
+    border-radius:15px;
+    background-color: rgba(24, 124, 170, 0.4);
+    padding:10px;
+    margin-top:10px;
+    border:1.spx solid rgb(127, 255, 212,0.9);
+    cursor: pointer;
+}
+.btn:hover{
+    background-color:  rgb(127, 255, 212,1) ;
+}
+input {
+    border: 1px solid black;
+    border-radius: 10px;
+    background-color: rgba(127, 255, 212, 0.1);
+    font-size: 15px;
+    font-family: 'stylus';
+}
+  </style>
+</head>
+<body>
+    <h1>AGE <span class="text">Calculator</span></h1>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-12 col-lg-6 col-md-6">
+          <div class="main">
+            <h3>Select your date of birth</h3>
+              <input type="date" class="area" id="text"><br><br>
+              <button class="btn" value="calculate" onclick="calculate()">Calculate</button>
+          </div>
+      </div>
+    
+   
+    <div id="result" class="container2">
+      <h4>your age:</h4>
+    </div>
+  </div>
+   </div>
+    <button class="btn" value="listen" onclick="listening()">Listen</button>
+    <script>
+        function listening() {
+            const synth = window.speechSynthesis;
+            let texti=result.innerText;
+          
+            if (texti !== '') {
+                const utterThis = new SpeechSynthesisUtterance(texti);
+                synth.speak(utterThis);
+            } else {
+                alert('Please select a date!');
+            }
+        }
+
+        function calculate() {
+    const dob = document.getElementById("text").value;
+    if (!dob) {
+        alert("Please select a date!");
+        return;
+    }
+    
+    const dobDate = new Date(dob);
+    const today = new Date();
+    const age = Math.floor((today - dobDate) / (365.25 * 24 * 60 * 60 * 1000));
+    let text = "";
+
+    if (age <= 9 && age >0) {
+        text = "Hey, you are just a kid, oh sweet!";
+    } else if (age >= 10 && age <= 16) {
+        text = "Wow, you are just entering into your teenage years!";
+    } else if (age >= 17 && age <= 25) {
+        text = "You are in your prime youth!";
+    } else if (age >= 26 && age <= 35) {
+        text = "You are in your mid-twenties to mid-thirties, the world is yours!";
+    } else if (age >= 36 && age <= 50) {
+        text = "You are in your late thirties to early fifties, keep thriving!";
+    } else if (age >= 51 && age <= 65) {
+        text = "You are in your mid-fifties to mid-sixties, enjoy this stage!";
+    } else if (age >= 66 && age <= 80) {
+        text = "You are in your late sixties to late seventies, cherish every moment!";
+    }else if(age<=0){
+      text="you are not given an correct input please give correct date"
+    } 
+    else {
+        text = "You are an experienced soul, keep shining!";
+    }
+
+    document.getElementById('result').innerText = "Your age is: " + age + "\n" + text;
+}
+
+    </script>
+</body>
+</html>
